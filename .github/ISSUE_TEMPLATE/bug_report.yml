@@ -1,0 +1,37 @@
+name: Bug report
+description: Report a documentation, rendering, or evidence issue.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for broken screenshots, incorrect captions, GitHub Pages rendering issues, or factual mistakes in the write-up.
+  - type: input
+    id: location
+    attributes:
+      label: Affected location
+      description: Which page, section, or screenshot is affected?
+      placeholder: README.md > Evidence Walkthrough > Ref 7
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: What is wrong?
+      placeholder: Describe the problem clearly.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect instead?
+      placeholder: Describe the correct behavior or content.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Extra context
+      placeholder: Optional notes, browser details, or suggested fix.

@@ -1,0 +1,6 @@
+title: SOC Automation and Detection Engineering Homelab
+description: End-to-end SOC homelab with Splunk, Wazuh, n8n, DFIR-IRIS, Velociraptor, and automated response validation.
+theme: jekyll-theme-cayman
+markdown: kramdown
+kramdown:
+  input: GFM

@@ -1,0 +1,25 @@
+name: Feature request
+description: Suggest an improvement to the repository or Pages presentation.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: request
+    attributes:
+      label: Requested improvement
+      placeholder: Describe the change you want to see.
+    validations:
+      required: true
+  - type: textarea
+    id: value
+    attributes:
+      label: Why this helps
+      placeholder: Explain how it improves the case study, maintenance, or reader experience.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
+      placeholder: Optional implementation ideas or constraints.
