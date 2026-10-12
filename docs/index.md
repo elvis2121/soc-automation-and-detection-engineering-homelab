@@ -152,7 +152,7 @@ The low-risk script maps to benign browser/gateway activity and "No containment 
 In n8n, the alert is normalized, **DFIR-IRIS** opens a case, then a **VirusTotal v3** lookup enriches the indicator (reputation / detection counts).
 
 ### 3. LLM verdict
-The enriched alert is passed to a local model (LM Studio or Ollama; blueprint names `qwen/qwen3.5-9b` and Hermes3-8B / Gemma) at temperature **0.1**. The model must emit `FINAL_DECISION: HIGH_RISK` or `FINAL_DECISION: LOW_RISK`. An n8n switch branches on that verdict.
+The enriched alert is passed to a local model **`qwen/qwen3.5-9b`** (primary) via LM Studio or Ollama at temperature **0.1**; Hermes3-8B and Gemma were also tested. The model must emit `FINAL_DECISION: HIGH_RISK` or `FINAL_DECISION: LOW_RISK`. An n8n switch branches on that verdict.
 
 ### 4. Response
 - **HIGH_RISK:** Velociraptor runs **`Windows.Triage.Collection`** (Refs 12-14). n8n authenticates to the Wazuh Manager REST API (HTTPS port 55000) and triggers **Active Response** host isolation (e.g. firewall-drop / host-deny) (Ref 8). DFIR-IRIS records a timeline event.

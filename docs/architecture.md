@@ -17,7 +17,7 @@ Three operational planes:
 | --- | --- | --- |
 | Data plane | pfSense, Squid (SSL inspection), Suricata | Whitelist egress, decrypt inspected web traffic, network detection |
 | Telemetry plane | Windows 11 endpoint (Sysmon, Wazuh agent, Splunk Universal Forwarder), remote syslog | Host and network evidence into Splunk |
-| Response plane | n8n, VirusTotal v3, local LLM (LM Studio / Ollama), DFIR-IRIS, Velociraptor, Wazuh Active Response | Enrich, triage, case-manage, collect, isolate |
+| Response plane | n8n, VirusTotal v3, local LLM `qwen/qwen3.5-9b` (LM Studio / Ollama; Hermes3-8B and Gemma also tested), DFIR-IRIS, Velociraptor, Wazuh Active Response | Enrich, triage, case-manage, collect, isolate |
 
 ## Topology (logical)
 
@@ -69,7 +69,7 @@ Sequence after Splunk sends a webhook to n8n:
 3. **VirusTotal v3:** HTTP request node looks up the file hash or source IP and
    pulls reputation / detection counts.
 4. **Local LLM triage:** evidence packet goes to a local model via LM Studio or
-   Ollama. Documented models include `qwen/qwen3.5-9b` and Hermes3-8B / Gemma.
+   Ollama. Primary model: **`qwen/qwen3.5-9b`**. Hermes3-8B and Gemma were also tested.
    Temperature is fixed at **0.1**. The model must return a reproducible string
    containing either `FINAL_DECISION: HIGH_RISK` or `FINAL_DECISION: LOW_RISK`.
 5. **Switch** on that verdict:
@@ -101,7 +101,8 @@ Published evidence: Ref 8 (active response isolation).
 | Setting | Value from the lab blueprint |
 | --- | --- |
 | Runtime | LM Studio or Ollama |
-| Models named | `qwen/qwen3.5-9b`; also Hermes3-8B / Gemma |
+| Primary model | `qwen/qwen3.5-9b` |
+| Also tested | Hermes3-8B, Gemma |
 | Temperature | `0.1` |
 | Required output markers | `FINAL_DECISION: HIGH_RISK` or `FINAL_DECISION: LOW_RISK` |
 
