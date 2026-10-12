@@ -122,6 +122,26 @@ No real malware execution or uncontrolled external traffic was required for thes
 
 ![Windows Registry artifact evidence](assets/step-14.png)
 
+## MITRE ATT&CK Mapping
+The validation scenarios documented here are synthetic: a "simulated malicious IOC event" (high-risk path) and a benign browser/gateway event (low-risk path). The write-up does not yet say which adversary technique the high-risk IOC represents, so no technique is claimed below until the author confirms it.
+
+| Scenario | Technique | ID | Detection source | Response evidence |
+|---|---|---|---|---|
+| High-risk simulated IOC event | TBD by author | TBD by author | Splunk correlation search (Ref 6), Wazuh alert (Ref 7) | Velociraptor collection (Refs 12-14), Wazuh host isolation (Ref 8), DFIR-IRIS case (Ref 11) |
+| Low-risk browser/gateway event | N/A (benign) | N/A | Splunk correlation search (Ref 6) | Documented and closed (flow step 7) |
+
+## Detection-as-Code Artifacts (to be exported)
+The following artifacts back the screenshots above but are not yet in the repository. TODO (author): export each one, remove secrets (API keys, webhook URLs, internal hostnames), and commit it at the path shown.
+
+| Artifact | Planned path | Status |
+|---|---|---|
+| Splunk correlation search(es) (SPL) that fire the n8n webhook | `detections/splunk/` | TODO: export from Splunk saved searches |
+| n8n workflow JSON (enrichment, LLM triage, DFIR-IRIS, Velociraptor, Wazuh branches) | `soar/n8n/` | TODO: export from n8n, with credentials removed |
+| Local LLM triage prompt | `soar/n8n/` | TODO: export |
+| Wazuh custom rules and active-response configuration | `detections/wazuh/` | TODO: export `local_rules.xml` and the active-response config |
+| Suricata custom rules (if any) | `detections/suricata/` | TODO: export |
+| Velociraptor artifact/collection definitions | `forensics/velociraptor/` | TODO: export |
+
 ## GitHub Pages
 
 This site is designed to be published from the `/docs` folder on the `main` branch.
