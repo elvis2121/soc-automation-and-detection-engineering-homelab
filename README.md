@@ -2,6 +2,9 @@
 
 This repository documents an end-to-end SOC engineering homelab built to simulate enterprise-style monitoring, alert triage, enrichment, case management, forensic collection, and automated containment.
 
+## Objective
+Built and validated an end-to-end SOC detection and response pipeline: Splunk correlation alerts trigger an n8n SOAR workflow that enriches indicators with VirusTotal v3 and asks a local LLM (`qwen/qwen3.5-9b`, temperature 0.1) for a deterministic HIGH_RISK or LOW_RISK verdict. Each alert opens a DFIR-IRIS case; high-risk verdicts automatically trigger a Velociraptor `Windows.Triage.Collection` and Wazuh Active Response host isolation, while low-risk alerts are documented and closed. The full path was validated with synthetic high-risk and low-risk scenarios, without live malware or real IOC traffic.
+
 ## Overview
 
 The lab is organized into three operational planes:
